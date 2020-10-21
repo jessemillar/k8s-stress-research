@@ -59,7 +59,11 @@ Saw host CPU usage hold at 100% across all cores. The competing pods were not ab
 - Do we want a daemonset to have unlimited resource constraints, or to respect the cluster resource quote in the event of multitenant situations?
 - Do daemonsets get rescheduled to other nodes when resources are consumed?
 - Does Kubernetes react differently when the machine is stressed directly vs stressed from inside a container (e.g. Will it reschedule pods in one situation and not in another; we want to simulate real load as much as possible)?
+- How does networking inside a daemonset work?
+- How do we make sure the communication cert gets installed inside a daemonset container?
+- Would we save time/effort by instead wrapping an existing k8s stressing framework like [Pumba](https://github.com/alexei-led/pumba)?
 
 ## Arguments for Containerized Daemonset
 
 - Would work and be able to more easily respect multitenant resource namespacing
+- Might be simpler to interact with Kubernetes networking from inside the Kubernetes network
