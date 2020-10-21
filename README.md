@@ -11,15 +11,32 @@ The way I'm looking at it currently, there's three options for applying stress u
 
 1. Install the [Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server#requirements)
 
-## Testing
+## Tests Performed
 
-### Docker Test
+### Local Docker Test
 
-Run a `stress-ng` load test at 80% CPU for a minute:
+1. Used Docker on my development machine to run a `stress-ng` load test at 80% CPU for a minute:
+	```
+	docker run -it --rm alexeiled/stress-ng:latest-ubuntu --cpu 0 --cpu-load 80 --timeout 60s --metrics-brief
+	```
 
-```
-docker run -it --rm alexeiled/stress-ng:latest-ubuntu --cpu 0 --cpu-load 80 --timeout 60s --metrics-brief
-```
+Saw host CPU usage hold at 80% across all cores as expected.
+
+### Local Kubernetes Test
+
+1. Created a local Kubernetes cluster using [Kind](https://github.com/kubernetes-sigs/kind)
+1. Applied a
+	```
+	kubectl apply -f pod.yaml
+	```
+1. Triggered the `stress-ng` pod to load test at 80% CPU for a minute:
+	```
+	kubectl exec -it <stress-ng-pod> -- stress-ng --cpu 0 --cpu-load 80 --timeout 60s
+	```
+
+Saw host CPU usage hold at 80% across all cores as expected.
+
+### Local Kubernetes Test with Multiple Stressor Pods
 
 ## Questions to Answer
 
