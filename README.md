@@ -25,7 +25,7 @@ Saw host CPU usage hold at 80% across all cores as expected.
 ### Local Kubernetes Test
 
 1. Created a local Kubernetes cluster using [Kind](https://github.com/kubernetes-sigs/kind)
-1. Applied a
+1. Applied a pod spec to the cluster that contains `stress-ng`:
 	```
 	kubectl apply -f pod.yaml
 	```
@@ -37,6 +37,20 @@ Saw host CPU usage hold at 80% across all cores as expected.
 Saw host CPU usage hold at 80% across all cores as expected.
 
 ### Local Kubernetes Test with Multiple Stressor Pods
+
+1. Created a local Kubernetes cluster using [Kind](https://github.com/kubernetes-sigs/kind)
+1. Applied multiple pod specs to the cluster that contains `stress-ng`:
+	```
+	kubectl apply -f pod.yaml
+	kubectl apply -f pod2.yaml
+	```
+1. Triggered the `stress-ng` pods to load test at 80% CPU for a minute:
+	```
+	kubectl exec -it <stress-ng-pod1> -- stress-ng --cpu 0 --cpu-load 80 --timeout 60s
+	kubectl exec -it <stress-ng-pod2> -- stress-ng --cpu 0 --cpu-load 80 --timeout 60s
+	```
+
+Saw host CPU usage hold at 100% across all cores. The competing pods were not able to take CPU above 100% usage.
 
 ## Questions to Answer
 
