@@ -56,5 +56,10 @@ Saw host CPU usage hold at 100% across all cores. The competing pods were not ab
 
 - Are we trying to chaos test Kubernetes as a service, or chaos test a service that runs on Kubernetes?
 - Is it possible to guarantee that a daemonset has unlimited resource constraints?
+- Do we want a daemonset to have unlimited resource constraints, or to respect the cluster resource quote in the event of multitenant situations?
 - Do daemonsets get rescheduled to other nodes when resources are consumed?
 - Does Kubernetes react differently when the machine is stressed directly vs stressed from inside a container (e.g. Will it reschedule pods in one situation and not in another; we want to simulate real load as much as possible)?
+
+## Arguments for Containerized Daemonset
+
+- Would work and be able to more easily respect multitenant resource namespacing
