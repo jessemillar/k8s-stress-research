@@ -1,8 +1,8 @@
 # k8s-stress-research
 
-Yes, I'm aware there are existing projects that were created to apply stress to Kubernetes clusters, but I'm working on some internal Microsoft projects that are needed for custom infrastructure. As such, the research presented by this repository will be largely based around raw `stress-ng` with no non-Kubernetes wrappers.
+> Yes, I'm aware there are existing projects that were created to apply stress to Kubernetes clusters, but I'm working on some internal Microsoft projects that are needed for custom infrastructure. As such, the research presented by this repository will be largely based around raw `stress-ng` with no non-Kubernetes wrappers.
 
-The way I'm looking at it currently, there's three options for applying stress using `stress-ng`:
+The way I'm looking at it currently, there's three options for applying stress using a wrapper around `stress-ng`:
 1. Use a daemonset to run a container with `stress-ng` that tries to vampire suck all the resources of the node
 1. Use a sidecar of sorts to get `stress-ng` inside the application pods and apply stress directly
 1. Somehow install `stress-ng` on the actual VM (potentially via a daemonset) and stress the whole box
