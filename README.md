@@ -52,6 +52,13 @@ Saw host CPU usage hold at 80% across all cores as expected.
 
 Saw host CPU usage hold at 100% across all cores. The competing pods were not able to take CPU above 100% usage.
 
+### Create Namespace with CPU Limit
+
+```
+kubectl create namespace limitrange-cpu-50-percent
+kubectl apply -f limitrange-cpu-50-percent.yaml --namespace=constraints-cpu-example
+```
+
 ## Questions to Answer
 
 - Are we trying to chaos test Kubernetes as a service, or chaos test a service that runs on Kubernetes?
